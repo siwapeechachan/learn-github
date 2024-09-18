@@ -1,0 +1,22 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("ArmBrozy", "Synapse")
+local Tab = Window:NewTab("Players")
+local Section = Tab:NewSection("Teleport")
+ 
+--------------------
+
+Section:NewButton("Start", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5089.97266, 314.967407, -2923.91162, 0.921576738, -1.10030518e-08, 0.3881962, -1.10365701e-11, 1, 2.83702484e-08, -0.3881962, -2.6149646e-08, 0.921576738)
+end)
+
+Section:NewButton("1", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5076.99268, 315.028198, -2889.33008, 0.912705481, -0.057420738, 0.404563367, -7.41236548e-08, 0.990077198, 0.140524417, -0.408617973, -0.128257439, 0.903648913)
+end)
+
+Section:NewButton("2", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5061.84082, 314.453949, -2854.30786, 0.947182953, -0.066964291, 0.313624382, 1.05714143e-07, 0.977956116, 0.208810434, -0.320693731, -0.197781637, 0.926303387)
+end)
+
+Section:NewButton("3", " ", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5046.04395, 313.060333, -2812.9834, 0.902256191, -0.0810144097, 0.423521519, -0.000301889173, 0.98207283, 0.188501492, -0.431200296, -0.17020449, 0.88605684)
+end)
