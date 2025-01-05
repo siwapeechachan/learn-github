@@ -1,0 +1,52 @@
+-- ใช้ TweenService
+local TweenService = game:GetService("TweenService")
+
+-- อ้างอิงตัวละครของผู้เล่น
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart") -- อ้างอิง HumanoidRootPart ของตัวละคร
+
+-- กำหนดตำแหน่งของจุดเป้าหมาย (goal)
+local goalPosition = Vector3.new(5772.396, 1209.43396, 805.977173) -- ตำแหน่งเป้าหมาย
+
+-- กำหนดความเร็ว (หน่วยเป็น studs ต่อวินาที)
+local speed = 70 -- ความเร็วที่ต้องการ (เช่น 50 studs ต่อวินาที)
+
+-- คำนวณระยะทางจากตำแหน่งปัจจุบันของตัวละครไปยังตำแหน่งเป้าหมาย
+local function moveToTarget()
+    while true do
+        -- คำนวณระยะทางที่ตัวละครต้องเคลื่อนที่
+        local distance = (goalPosition - humanoidRootPart.Position).Magnitude
+        
+        -- คำนวณระยะเวลาที่ใช้ในการเคลื่อนที่จากความเร็วและระยะทาง
+        local time = 10
+        
+        -- กำหนดเป้าหมาย CFrame (ตำแหน่งที่ NPC)
+        local goal = {}
+        goal.CFrame = CFrame.new(goalPosition)
+
+        -- กำหนดคุณสมบัติของการเคลื่อนที่
+        local tweenInfo = TweenInfo.new(
+            speed, -- ใช้เวลาที่คำนวณจากความเร็วและระยะทาง
+            Enum.EasingStyle.Linear, -- รูปแบบการเคลื่อนที่
+            Enum.EasingDirection.In, -- ทิศทางของการเคลื่อนที่
+            0, -- จำนวนการเล่น (เล่นแค่ครั้งเดียว)
+            false, -- ไม่วนลูป
+            0 -- ไม่มีการหน่วงเวลา
+        )
+
+        -- สร้าง tween จากข้อมูลที่กำหนด
+        local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+
+        -- เริ่มการเคลื่อนที่
+        tween:Play()
+
+        -- รอให้การเคลื่อนที่เสร็จสมบูรณ์ ก่อนที่จะคำนวณระยะทางใหม่ (ให้ไปซ้ำ)
+        tween.Completed:Wait()
+        
+        -- ตัวละครจะวนกลับไปที่ตำแหน่งเป้าหมายเรื่อยๆ
+    end
+end
+
+-- เริ่มการเคลื่อนที่ไปยังจุดเป้าหมายอย่างต่อเนื่อง
+moveToTarget()
